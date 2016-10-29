@@ -1,0 +1,9 @@
+{% extends appname+"/admin_home.html" %}
+
+{% import 'macro.html' as macro with context %}
+
+{% block content %}
+
+    {{macro.render_simple_form(form)}}
+
+{% endblock %}

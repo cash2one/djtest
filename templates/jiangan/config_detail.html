@@ -1,0 +1,14 @@
+{% extends appname+"/admin_home.html" %}
+
+{% block caption %}{{ object.title }}{% endblock %} 
+
+{% block content %}
+    <table class="simple-table menu">
+{% for field in object._meta.fields %}
+    <tr>
+        <td>{{field.verbose_name}}</td>
+        <td><pre class="article">{{getattr(object,field.name)}}</pre></td>
+    </tr>
+{% endfor %}
+    </table>
+{% endblock %}

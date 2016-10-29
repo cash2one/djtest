@@ -1,0 +1,35 @@
+{% extends appname+"/admin_home.html" %}
+
+{% block title %}{{view.menu}}{% endblock %}
+
+{% block caption %}
+    <a href="{{appurl('config_create') }}">增加新配置+</a>
+{% endblock %}
+
+{% block content %}
+
+{% if object_list %}
+    <table class="simple-table menu">
+        {% for obj in object_list %}
+        <tr>
+            <td class="menu-name">
+            {% if obj.url %}
+                <a href="{{obj.url}}" target="_blank" title="查看公告">{{obj.title}}</a>
+            {% else %}
+                {{obj.title}}
+            {% endif %}
+            </td>
+            <td class="menu-action">
+                <a href="{{appurl('config_update',pk=obj.pk) }}"><i class="fa fa-edit fa-fw"></i>编辑</a>
+            </td>
+            <td class="menu-action">
+                <a href="{{appurl('config_detail',pk=obj.pk) }}"><i class="fa fa-hand-pointer-o fa-fw"></i>查看</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>没有任何配置记录</p>
+{% endif %}
+
+{% endblock %}

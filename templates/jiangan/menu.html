@@ -1,0 +1,30 @@
+{% extends appname+"/home.html" %}
+
+{% block title %}{{view.menu}}{% endblock %}
+
+{% block caption %}{{view.menu}}.{% endblock %}
+
+{% block content %}
+{% if menu_objs %}
+	<table class="simple-table menu">
+		<tr>
+			<th class="menu-name">考试名称</th>
+			<th class="menu-action">操作</th>
+		</tr>
+		{% for e in menu_objs %}
+		<tr>
+			<td>
+			{% if e.title_url %}
+				<a href="{{e.title_url}}" target="_blank" title="查看公告">{{ e.title }}</a>
+			{% else %}
+				{{ e.title }}
+			{% endif %}
+			</td>
+			<td><a href="{{e.action_url}}">{{e.action}}</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<p>暂无考试</p>
+{% endif %}
+{% endblock %}

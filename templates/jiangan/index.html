@@ -1,0 +1,48 @@
+{% extends appname+"/admin_home.html" %}
+
+{% block title %} {{config.title}} {% endblock %}
+
+{% block caption %}{{ config.title }}{% endblock %} 
+
+{% block content %}
+
+{% if object_list %}
+    <table class="simple-table menu">
+        <tr>
+            <th style=''>姓名</th>
+            <th style=''>身份证</th>
+            <th style=''>性别</th>
+            <th style=''>联系方式</th>
+            <th style=''>年龄</th>
+            <th style=''>报考岗位</th>
+            <th style=''>学历</th>
+            <th style=''>毕业院校</th>
+            <th style=''>专业</th>
+            
+        </tr>
+        {% for obj in object_list %}
+        <tr>
+            <td style=''>
+                <a target="_blank" 
+                title="点击查看该考生的详细资料" 
+                href="{{ appurl('admin_detail',pk=obj.pk, **config.kwargs) }}">
+                    {{obj.xm}}
+                </a>
+            </td>
+            <td style=''>{{obj.creater.sfzh}}</td>
+            <td style=''>{{obj.xb}}</td>
+            <td style=''>{{obj.readable_lxdh}}</td>
+            <td style=''>{{obj.age}}</td>
+            <td style=''>{{obj.bkgw}}</td>
+            <td style=''>{{obj.xl}}</td>
+            <td style=''>{{obj.byyx}}</td>
+            <td style=''>{{obj.zy}}</td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>没有任何记录</p>
+{% endif %}
+
+{% endblock %}

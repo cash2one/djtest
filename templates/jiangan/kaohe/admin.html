@@ -1,0 +1,165 @@
+{% extends appname+"/admin_home.html" %}
+
+{% block title %}{{view.config.title}}{% endblock %}
+
+{% block caption %}{{ view.config.title }}({{object_list.count()}}){% endblock %} 
+
+{% block extra_menu %}
+    <div class='line'></div>
+    {% for query_type, name in view.menu_cn.items() %}
+        <li> 
+        <a {% if view.query_type==query_type %}class="youarehere"{% endif %} 
+        href="{{appurl('admin',query_type=query_type, **config.kwargs)}}">{{name}}</a></li>
+    {% endfor %}
+
+    {% if view.query_type == 'check_passed' %}
+        <li><a href="{{appurl('write_zkzh',**config.kwargs)}}">生成准考证号</a></li>
+    {% elif view.query_type == 'bscj_todo'%}
+        <li><a href="{{appurl('download',field='zkzh',**config.kwargs)}}">下载准考证号名单</a></li>
+    {% elif view.query_type == 'bscj_done'%}
+        <li><a href="{{appurl('write_bspm',**config.kwargs)}}">生成笔试排名</a></li>
+        <li><a href="{{appurl('download',field='bspm',**config.kwargs)}}">下载笔试排名</a></li>
+    {% elif view.query_type == 'mscj_done'%}
+        <li><a href="{{appurl('write_zpm',**config.kwargs)}}">生成总排名</a></li>
+        <li><a href="{{appurl('download', field='zpm',**config.kwargs)}}">下载总排名</a></li>
+        
+    {% endif %}
+
+{% endblock %}
+
+
+{% block content %}
+
+{% if object_list %}
+
+<table class="simple-table">
+    {% if view.query_type in ('check_pending','check_not_pay','check_passed','check_refused') %}
+        <tr>
+            <th>头像</th>
+            <th><div class="radio">姓名</div></th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>学历</th>
+            <th>毕业院校</th>
+            <th>专业</th>
+            <th>报考岗位</th>
+            <th><div class="radio">审核操作</div></th>
+            <th>消息</th>
+            <th>是否缴费</th>
+        </tr>
+        {% for obj in object_list %}
+        <tr>
+            <td>
+                <a target="_blank" title="点击查看该考生的详细资料" href="{{appurl('admin_detail',pk=obj.pk,**config.kwargs)}}">
+                <img width="100" height="140" src="{% if obj.tx %}{{ obj.tx.url }}{% endif %}"></img>
+                </a>
+            </td>
+            <td>
+                <a target="_blank" title="点击查看该考生的详细资料" href="{{appurl('admin_detail',pk=obj.pk,**config.kwargs)}}">
+                    {{obj.xm}}
+                </a>
+            </td>
+            <td>{{obj.xb}}</td>
+            <td>{{obj.age}}</td>
+            <td>{{obj.xl}}</td>
+            <td>{{obj.byyx}}</td>
+            <td >{{obj.zy}}</td>
+            <td>{{obj.bkgw}}</td>
+            <td>{{obj.render_field('check_status',attrs={'pk':obj.pk})}}</td>
+            <td>{{obj.render_field('message',attrs={'cols':15,'rows':3,'pk':obj.pk})}}</td>
+            <td>{{'是' if obj.is_pay else '否'}}</td>
+        </tr>
+        {% endfor %}
+    {% elif view.query_type == 'bscj_todo' %}
+        <tr>
+            <th>准考证号</th>
+            <th>姓名</th>
+            <th>身份证号</th>
+            <th>报考岗位</th>
+            <th>笔试成绩</th>
+        </tr>
+        {% for obj in object_list %}
+        <tr>
+            <td>{{obj.zkzh}}</td>
+            <td>                <a target="_blank" title="点击查看该考生的详细资料" href="{{appurl('admin_detail',pk=obj.pk,**config.kwargs)}}">
+                    {{obj.xm}}
+                </a></td>
+            <td>{{obj.creater.sfzh}}</td>
+            <td>{{obj.bkgw}}</td>
+            <td>{{obj.render_field('bscj', render_value=False, attrs={'pk':obj.pk})}}</td>
+        </tr>
+        {% endfor %}
+    {% elif view.query_type == 'bscj_done' %}
+        <tr>
+            <th>准考证号</th>
+            <th>姓名</th>
+            <th>身份证号</th>
+            <th>报考岗位</th>
+            <th>笔试成绩</th>
+            <th>笔试排名</th>
+        </tr>
+        {% for obj in object_list %}
+        <tr>
+            <td>{{obj.zkzh}}</td>
+            <td>                <a target="_blank" title="点击查看该考生的详细资料" href="{{appurl('admin_detail',pk=obj.pk,**config.kwargs)}}">
+                    {{obj.xm}}
+                </a></td>
+            <td>{{obj.creater.sfzh}}</td>
+            <td>{{obj.bkgw}}</td>
+            <td>{{obj.render_field('bscj',attrs={'pk':obj.pk})}}</td>
+            <td>{{obj.bspm}}</td>          
+        </tr>
+        {% endfor %}
+    {% elif view.query_type == 'mscj_todo' %}
+        <tr>
+            <th>准考证号</th>
+            <th>姓名</th>
+            <th>身份证号</th>
+            <th>报考岗位</th>
+            <th>面试成绩</th>
+        </tr>
+        {% for obj in object_list %}
+        <tr>
+            <td>{{obj.zkzh}}</td>
+            <td>                <a target="_blank" title="点击查看该考生的详细资料" href="{{appurl('admin_detail',pk=obj.pk,**config.kwargs)}}">
+                    {{obj.xm}}
+                </a></td>
+            <td>{{obj.creater.sfzh}}</td>
+            <td>{{obj.bkgw}}</td>
+            <td>{{obj.render_field('mscj',render_value=False,attrs={'pk':obj.pk})}}</td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <th>准考证号</th>
+            <th>姓名</th>
+            <th>身份证号</th>
+            <th>报考岗位</th>
+            <th>面试成绩</th>  
+            <th>笔试成绩</th>
+            <th>总成绩</th>
+            <th>总排名</th>
+        </tr>
+        {% for obj in object_list %}
+        <tr>
+            <td>{{obj.zkzh}}</td>
+            <td>                
+                <a target="_blank" title="点击查看该考生的详细资料" href="{{appurl('admin_detail',pk=obj.pk,**config.kwargs)}}">
+                    {{obj.xm}}
+                </a>
+            </td>
+            <td>{{obj.creater.sfzh}}</td>
+            <td>{{obj.bkgw}}</td>
+            <td>{{obj.render_field('mscj',attrs={'pk':obj.pk})}}</td>
+            <td>{{obj.bscj}}</td>
+            <td>{{obj.zcj}}</td>
+            <td>{{obj.zpm}}</td>                
+        </tr>
+        {% endfor %}
+    {% endif %}
+</table>
+{% else %}
+<p>没有任何记录</p>
+{% endif %}
+
+{% endblock %}

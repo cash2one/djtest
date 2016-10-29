@@ -1,0 +1,136 @@
+{% extends appname+"/home.html" %}
+
+{% block title %}{{view.config.title}}{% endblock %}
+
+{% block caption %}{{ view.config.title }}({{object_list.__len__()}}){% endblock %} 
+
+{% block extra_menu %}
+
+    {% for query_type, e in view.menu_dict.items() %}
+        <li><a 
+        {% if view.query_type==query_type %}class="youarehere"{% endif %} 
+        href="{{'%s?query_type=%s'%(request.path, query_type)}}">{{query_type}}</a></li>
+    {% endfor %}
+
+    {% if view.query_type == '通过审核' %}
+        <li><a href="{{appurl('write_zkzh',**config.kwargs)}}">生成准考证号</a></li>
+    {% elif view.query_type == '已录入-笔试成绩'%}
+        <li><a href="{{appurl('write_bspm',**config.kwargs)}}">生成笔试排名</a></li>
+        <li><a href="{{appurl('download',field='bspm',**config.kwargs)}}">下载笔试排名</a></li>
+    {% elif view.query_type == '已录入-面试成绩'%}
+        <li><a href="{{appurl('write_zpm',**config.kwargs)}}">生成总排名</a></li>
+        <li><a href="{{appurl('download', field='zpm',**config.kwargs)}}">下载总排名</a></li>
+    {% endif %}
+
+{% endblock %}
+
+
+{% block content %}
+
+{% if object_list %}
+
+<table class="simple-table">
+    {% if view.query_type in ('待审核','通过审核','未通过审核') %}
+        <tr>
+            <th>头像</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>全日制学历</th>
+            <th>全日制毕业院校</th>
+            <th>全日制专业</th>
+            <th>在职学历</th>
+            <th>在职毕业院校</th>
+            <th>在职专业</th>
+            <th>报考岗位</th>
+            <th>审核操作</th>
+            <th>消息</th>
+        </tr>
+        {% for obj in object_list %}
+        <tr>
+            <td>
+                <img width="100" height="140" src="{% if obj.tx %}{{ obj.tx.url }}{% endif %}"></img>
+            </td>
+            <td>
+                <a target="_blank" title="点击查看该考生的详细资料" href="{{appurl('admin_detail',pk=obj.pk,**config.kwargs)}}">
+                    {{obj.xm}}
+                </a>
+            </td>
+            <td>{{obj.xb}}</td>
+            <td>{{obj.age}}</td>
+            <td>{{obj.qrzxl}}</td>
+            <td>{{obj.qrzbyyx}}</td>
+            <td>{{obj.qrzzy}}</td>
+            <td>{{obj.zzxl}}</td>
+            <td>{{obj.zzbyyx}}</td>
+            <td>{{obj.zzzy}}</td>
+            <td>{{obj.bkgw}}</td>
+            <td>{{obj.render_field('check_status',attrs={'class':'blur-radio-post'})}}</td>
+            <td>{{obj.render_field('message',attrs={'class':'blur-text-post', 'cols':15,'rows':3})}}</td>
+        </tr>
+        {% endfor %}
+    {% elif view.query_type in ('待录入-笔试成绩','已录入-笔试成绩') %}
+        <tr>
+            <th>准考证号</th>
+            <th>姓名</th>
+            <th>身份证号</th>
+            <th>报考岗位</th>
+            <th>笔试成绩</th>
+            {% if view.query_type=='已录入-笔试成绩' %}
+                <th>笔试排名</th>
+            {% endif %}
+        </tr>
+        {% for obj in object_list %}
+        <tr>
+            <td>{{obj.zkzh}}</td>
+            <td>{{obj.xm}}</td>
+            <td>{{obj.creater.sfzh}}</td>
+            <td>{{obj.bkgw}}</td>
+            <td>
+              <input class="blur-float-post" pk="{{obj.pk}}" name="bscj" type="number" {% if obj.bscj!=-1%}value="{{obj.bscj}}"{% endif %} />
+            </td>
+            {% if view.query_type=='已录入-笔试成绩' %}
+              <td>{{obj.bspm}}</td>          
+            {% endif %}
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <th>准考证号</th>
+            <th>姓名</th>
+            <th>身份证号</th>
+            <th>报考岗位</th>
+            <th>面试成绩</th>
+            {% if view.query_type !=  '待录入-面试成绩' %}
+                
+            {% else %}
+                <th>笔试成绩</th>
+                <th>总成绩</th>
+                <th>总排名</th>
+            {% endif %}
+        </tr>
+        {% for obj in object_list %}
+        <tr>
+            <td>{{obj.zkzh}}</td>
+            <td>{{obj.xm}}</td>
+            <td>{{obj.creater.sfzh}}</td>
+            <td>{{obj.bkgw}}</td>
+            <td>
+              <input class="blur-float-post" pk="{{obj.pk}}" name="bscj" type="number" {% if obj.bscj!=-1%}value="{{obj.bscj}}"{% endif %} />
+            </td>
+            {% if view.query_type ==  '待录入-面试成绩' %}
+
+            {% else %}
+                <td>{{obj.bscj}}</td>
+                <td>{{obj.zcj}}</td>
+                <td>{{obj.zpm}}</td>                
+            {% endif %}
+        </tr>
+        {% endfor %}
+    {% endif %}
+</table>
+{% else %}
+<p>没有任何记录</p>
+{% endif %}
+
+{% endblock %}

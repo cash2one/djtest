@@ -1,0 +1,14 @@
+{% extends "accounts/home.html" %}
+
+{% block content %}
+<h2 class="tc">请
+	{% if mail_url %}
+		<a href="{{ mail_url }}" title="点击登陆邮箱">登陆</a>
+	{% else %}
+		登陆
+	{% endif %}
+您的邮箱,激活账号</h2>
+
+<p class="tc">一个激活链接发送到了您注册账号时填写的邮箱,3天后将失效.</p>
+
+{% endblock %}

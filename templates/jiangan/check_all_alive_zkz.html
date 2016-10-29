@@ -1,0 +1,44 @@
+{% extends appname+"/admin_home.html" %}
+
+{% block title %} {{config.title}} {% endblock %}
+
+{% block caption %}{{ config.title }}{% endblock %} 
+
+{% block content %}
+
+{% if object_list %}
+    <table class="simple-table menu">
+        <tr>
+            <th style=''>姓名</th>
+            <th style=''>身份证</th>
+            <th style=''>报考岗位</th>
+            <th style=''>联系方式</th>
+            <th style=''>准考证号</th>
+            <th style=''>考室号</th>
+            <th style=''>考试时间</th>
+            
+            <th style=''>考试地点</th>
+            <th style=''>考试科目</th>
+        </tr>
+        {% for obj in object_list %}
+        <tr>
+            <td style=''>
+                    {{obj.xm}}
+            </td>
+            <td style=''>{{obj.creater.sfzh}}</td>
+            <td style=''>{{obj.bkgw}}</td>
+            <td style=''>{{obj.readable_lxdh}}</td>
+            <td style=''>{{obj.zkzh}}</td>
+            <td style=''>{{obj.ksh}}</td>
+            <td style=''>{{obj.kssj}}</td>
+            <td style=''>{{obj.ksdd}}</td>
+            <td style=''>{{obj.kskm}}</td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>没有任何记录</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base_home.html" %}
+
+{% block app_css %}
+  <link href="{{STATIC_URL}}{{appname}}/css/simple.css{% if DEBUG %}?v={{rand()}}{% endif %}" rel="stylesheet" type="text/css" /> 
+{% endblock %}
+
+{% block app_js %}
+  <script src="{{ STATIC_URL }}{{appname}}/js/button.js{% if DEBUG %}?v={{rand()}}{% endif %}"></script> 
+{% endblock %}
+
+
+{% block main %}
+  <div id="option" class="col-15"><div class="oi">
+    <ul class="vmenu fr">
+      {% for name, code in ORDI_MENU %}
+      <li><a {% if view.menu==name %}class="youarehere"{% endif %} href="{{appurl(code)}}">{{name}}</a></li>  
+      {% endfor %}
+      {% block extra_menu %}{% endblock %} 
+    </ul>
+  </div></div>
+
+  <div id="content" class="col-85"><div class="oi">
+    <h1 class="bottom title">
+    {% block caption %}{% endblock %} 
+    </h1>
+    {% block hint %}{% endblock %} 
+    {% block content %}{% endblock %} 
+  </div></div>
+{% endblock %} 

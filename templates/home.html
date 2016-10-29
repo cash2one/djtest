@@ -1,0 +1,17 @@
+{% extends "base_home.html" %}
+
+{% block main %}
+<div id="option" class="col-15"><div class="oi">
+  <ul class="vmenu fr">
+    {% block option %}{% endblock %}
+  </ul>
+</div></div>
+
+<div id="content" class="col-85"><div class="oi">
+    <h1 class="bottom title">
+    {% block caption %}{% endblock %} 
+    </h1>
+    {% block hint %}{% endblock %} 
+    {% block content %}{% endblock %} 
+</div></div>
+{% endblock %} 

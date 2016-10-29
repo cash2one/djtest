@@ -1,0 +1,14 @@
+{% macro render_simple_form(form) -%}
+<form class="simple-form" enctype="multipart/form-data" method="post">
+    {{ csrf_input }} {{ form.non_field_errors() }}
+    <table>
+        {% for field in form %}
+        <tr>
+            <td>{{field.label_tag()}}</td>
+            <td>{{field}} {{field.errors}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <input class="simple-button" type="submit" value="提交"/>
+</form>
+{%- endmacro %}

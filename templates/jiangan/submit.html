@@ -1,0 +1,22 @@
+{% extends appname+"/home.html" %}
+
+{% block title %}{{config.title}}{% endblock %}
+
+{% block caption %}{{config.title}}{% endblock %}
+
+{% block content %}
+
+
+<table class="simple-table menu">
+	<tr>
+		<th class="menu-name">信息</th>
+		<th class="menu-action">操作</th>
+	</tr>
+	<tr>
+		<td class='center' style='color:{{ message_color }}'>{{ message }}</td>
+		<td class='center'><a href="{{ action_url }}">{{ action }}</a></td>
+	</tr>
+</table>
+
+
+{% endblock %}

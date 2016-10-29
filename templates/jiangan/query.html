@@ -1,0 +1,45 @@
+{% extends appname+"/home.html" %}
+
+{% block title %}{{view.config.title}}{% endblock %}
+
+{% block caption %}{{ config.title }}{% endblock %} 
+
+{% block content %}
+    <div class='col-50 zkz-base-info'><div class='oi'>
+        <div class='row'>
+            <div class='label'>姓名</div><div class='info'>{{object.xm}}</div>
+        </div>
+        <div class='row'>
+            <div class='label'>身份证号</div><div class='info'>{{object.creater.sfzh}}</div>
+        </div>
+        <div class='row'>
+            <div class='label'>准考证号</div><div class='info'>{{object.zkzh}}</div>
+        </div>
+        <div class='row'>
+            <div class='label'>报考岗位</div><div class='info'>{{object.bkgw}}</div>
+        </div>
+        <div class='row'>
+            <div class='label'>笔试成绩</div><div class='info'>{{object.bscj}}</div>
+        </div>     
+        <div class='row'>
+            <div class='label'>笔试排名</div><div class='info'>{{object.bspm}}</div>
+        </div>  
+        <div class='row'>
+            <div class='label'>是否进入面试</div><div class='info'>{{'是' if object.is_mianshi else '否'}}</div>
+        </div>     
+        {% if can_query_all %}
+            <div class='row'>
+                <div class='label'>面试成绩</div><div class='info'>{{object.mscj}}</div>
+            </div>     
+            <div class='row'>
+                <div class='label'>总成绩</div><div class='info'>{{object.zcj}}</div>
+            </div>  
+            <div class='row'>
+                <div class='label'>总排名</div><div class='info'>{{object.zpm}}</div>
+            </div> 
+            <div class='row'>
+                <div class='label'>是否进入体检</div><div class='info'>{{'是' if object.is_tijian else '否'}}</div>
+            </div>   
+        {% endif %} 
+    </div></div>
+{% endblock %}

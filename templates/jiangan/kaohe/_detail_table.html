@@ -1,0 +1,80 @@
+
+
+ <div class="center"> <input type="button" onclick="printDiv('print-area')" value="打印报名表" /></div>
+
+ <div id="print-area"> 
+
+     <div class="center"> <h2>{{config.title}}<br/>报名信息表</h2></div>
+
+ <table class="detail-table">
+    <tr>
+        <td class="label"><div>姓名</div></td>
+        <td class="value"><div>{{object.xm}}</div></td>
+        <td class="label"><div>性别</div></td>
+        <td class="value"><div>{{object.xb}}</div></td>
+        <td class="label"><div>出生年月</div></td>
+        <td class="value"><div>{{object.csny}}</div></td>
+        <td class="value" rowspan="3">
+          <img width="100px" height="140px" src="{% if object.tx %}{{ object.tx.url }}{% endif %}"></img>
+        </td>
+    </tr>
+    <tr>
+        <td class="label"><div>民族</div></td>
+        <td class="value"><div>{{object.mz}}</div></td>
+        <td class="label"><div>籍贯</div></td>
+        <td class="value"><div>{{object.jg}}</div></td>
+        <td class="label"><div>出生地</div></td>
+        <td class="value"><div>{{object.csd}}</div></td>
+    </tr>
+    <tr>
+        <td class="label"><div>政治面貌</div></td>
+        <td class="value"><div>{{object.zzmm}}</div></td>
+        <td class="label"><div>身份证号码</div></td>
+        <td class="value" colspan="3"><div>{{object.creater.sfzh}}</div></td>
+    </tr>
+    <tr>
+        <td class="label"><div>全日制普通教育学历及学位</div></td>
+        <td class="value" colspan="3"><div>{{object.xl}}{{object.xw}}</div></td>
+        <td class="label"><div>毕业院校及专业</div></td>
+        <td class="value" colspan="2"><div>{{object.byyx}}{{object.zy}}</div></td>
+    </tr>
+    <tr>
+        <td class="label"><div>取得的专业技术资格证</div></td>
+        <td class="value" colspan="6"><div>{{object.zyjszgz}}</div></td>
+    </tr>
+    <tr>
+        <td class="label"><div>通信地址及电子邮箱</div></td>
+        <td class="value" colspan="3"><div>{{object.txdz}}{{object.dzyx}}</div></td>
+        <td class="label"><div>联系电话</div></td>
+        <td class="value" colspan="2"><div>{{object.lxdh}}</div></td>
+    </tr>
+    <tr>
+        <td class="label"><div>报考单位及岗位</div></td>
+        <td class="value" colspan="3"><div>{{object.bkgw}}</div></td>
+        <td class="label"><div>岗位代码</div></td>
+        <td class="value" colspan="2"><div>{{object.gwdm}}</div></td>
+    </tr>
+    <tr>
+        <td class="label"><div>个人简历</div></td>
+        <td class="value" colspan="6"><div>{{object.grjl}}</div></td>
+    </tr>
+    <tr>
+        <td class="label"><div>奖惩情况</div></td>
+        <td class="value" colspan="6"><div>{{object.jcqk}}</div></td>
+    </tr>
+    <tr>
+        <td class="label"><div>家庭主要成员及主要社会关系</div></td>
+        <td class="value" colspan="6"><div>{{object.jtzycyqk}}</div></td>
+    </tr>
+    <tr>
+        <td class="label"><div>承诺</div></td>
+        <td class="value" colspan="6"><div><pre>本人愿对以上填写内容真实性负法律责任。
+签名：年月日</pre></div></td>
+    </tr>
+</table>
+
+</div>
+
+ <div class="center"> <input type="button" onclick="printDiv('print-area')" value="打印报名表" /></div>
+
+        

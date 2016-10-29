@@ -1,0 +1,18 @@
+{% extends appname+"/home.html" %}
+
+{% import 'macro.html' as macro with context %}
+
+{% block title %}{{config.title}}{% endblock %}
+
+{% block caption %}{{ config.title }}{% endblock %} 
+
+{% block content %}
+
+<div class='page-hint'>
+    注意, 本报名对应考生身份证号为{{user.sfzh[:6]}}********{{user.sfzh[-4:]}}, 
+    如果不是本人, 请<a href="{{url('accounts:logout')}}" title="点击退出登录">点击此处注销</a>
+</div>
+
+{{macro.render_simple_form(form)}}
+
+{% endblock %}

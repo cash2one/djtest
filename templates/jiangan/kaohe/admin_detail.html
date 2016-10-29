@@ -1,0 +1,18 @@
+{% extends appname+"/admin_home.html" %}
+
+{% block title %}{{view.config.title}}{% endblock %}
+
+{% block page_js %}
+    <script src="{{ STATIC_URL }}{{appname}}/js/page.js{% if DEBUG %}?v={{rand()}}{% endif %}"></script> 
+{% endblock %}
+
+{% block extra_menu %}
+    <li><a href="{{appurl('admin_zkz',pk=object.pk,**config.kwargs)}}">查看该考生准考证</a></li>
+{% endblock %} 
+
+{% block content %}
+
+{% include appname+"/kaohe/_detail_table.html"%} 
+
+{% endblock %}
+        

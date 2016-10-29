@@ -1,0 +1,46 @@
+{% extends "home.html" %}
+
+{% block caption %} 
+欢迎您,考生! 
+{% endblock %}
+
+{% block title %}江安人事考试网{% endblock %}
+
+{% block option %}
+    {% for xian, context in xiand.items() %}
+        <li><a href="{{ url(xian+':submit_menu') }}" title="查看该地区所有考试"> {{context.xian_cn}} </a></li>
+    {% endfor %}
+{% endblock %} 
+
+{% block content %}
+{% if urls %}
+    <table class="simple-table menu">
+        <tr>
+            <th class="">地区 </th>
+            <th class="menu-name">考试名称</th>
+            <th class="menu-action">操作</th>
+        </tr>
+        {% for area, area_url, title, url, action in urls %}
+        <tr>
+            <td>
+                <a href="{{area_url}}" target="_blank" title="查看该地区所有考试">{{ area }}</a>
+            </td>
+            <td>
+            {% if url %}
+                <a href="{{url}}" target="_blank" title="查看公告">{{ title }}</a>
+            {% else %}
+                {{ title }}
+            {% endif %}
+            </td>
+            <td><a href="{{action}}">进入</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+暂无考试
+{% endif %}
+<div class='wx-float'>
+    <div>第一时间获得考试资讯</div>
+    <img width="150px" height="150px" src="{{STATIC_URL}}erweima.jpg"></img>
+</div>
+{% endblock %}

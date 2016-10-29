@@ -1,0 +1,143 @@
+{% extends appname+"/home.html" %}
+
+{% block title %}准考证模板{% endblock %}
+
+{% block content %}
+<div class="center"> <input type="button" onclick="printDiv('print-area')" value="打印准考证" /></div>
+<!-- 
+<div class='col-'><div class='oi'>
+
+
+</div></div>
+
+<div class=''>
+
+
+</div>
+ -->
+
+<div id='print-area'>
+
+<div class='zkz'>
+<div class='up'>
+
+    <div class='col-50 zkz-rules'><div class='oi'>
+        <div class="center title">考试规则</div>
+        <ol class="items">
+            <li>考试前15分钟，考生必须凭本人准考证和身份证（不含旧版临时身份证和过期身份证）进入考场，对号入座，并将准考证、身份证放在桌面右上角。两证不齐者，不得进入考室。</li>
+            <li>考试开始30分钟后，考生不得进入考室参加本次考试。</li> 
+            <li>应试人员参加考试必须携带黑色字迹的钢笔或中性笔等考试用品，开考后不得转借、传递任何物品。</li>
+            <li>除规定用品外，不得携带其他用品进入座位。严禁将各种电子、通信、计算、存储或其他设备带至座位，已带入考场的要按监考人员的要求切断电源并存放在指定位置。凡发现将上述各种设备或非规定用品带至座位的，一律按违纪处理。</li>
+            <li>不得要求监考人员解释试题，如遇试卷分发错误，页码序号不对，字迹模糊或答题卡有褶皱、污点等问题，应举手询问。</li> 
+            <li>考试期间必须保持安静，禁止吸烟，严禁交头接耳、左顾右盼，不得擅自离开座位、不得窥视他人试卷、答题卡及其他答题材料，不得将试卷（题本）、答题卡（纸）和草稿纸带出考场，否则，按违纪处理。</li> 
+            <li>提前交卷的人员，必须迅速离场，不得在考场附近停留、喧哗。考试结束铃响，应立即停止答题，并将试卷反面向上放在桌面上，由监考人员清点回收试卷，在交题本和答题卡后，考生必须在考场记录单上签字确认，否则视为未交卷。经监控人员允许后，方可离开考室。</li> 
+            <li>考生须服从考务工作人员管理，接受监考人员的监督和检查，对无理取闹或辱骂、威胁、报复考务工作人员者，按有关纪律和规定处理。</li> 
+            <li>当次考试对上述考试规则有特殊要求的，按当次考试的特殊要求执行，详见当次考试准考证下方的温馨提示。</li> 
+            <!-- <li></li>  -->
+        </ol>
+    </div></div>
+
+    <div class='col-50 zkz-flag'><div class='oi'>
+        <div class="zkz-org title center">{{xian_cn}}人事考试</div>
+        <div class='zhang single title center'>
+            准<br/>
+            考<br/>
+            证
+            <img src="{{STATIC_URL+appname}}/images/zhang.png"/>
+        </div>
+        <div class="zkz-footer title center">{{xian_cn}}人力资源和社会保障局 制</div>
+    </div></div>
+
+    <div class="clear"></div>
+</div>
+<div style="height:2em"> </div>
+<div class='down'>
+
+    <div class='zkz-title title center'>
+        二O一六年第一次公开考调机关事业单位工作人员公告<br/>
+        <div style="letter-spacing:1em;" class="title center">准考证</div>
+    </div>
+
+    <div class='col-85 zkz-base-info'><div class='oi'>
+        <div class='row'>
+            <div class='label'>姓名</div><div class='info'> </div>
+        </div>
+        <div class='row'>
+            <div class='label'>身份证号</div><div class='info'> </div>
+        </div>
+        <div class='row'>
+            <div class='label'>准考证号</div><div class='info'> </div>
+        </div>
+        <div class='row'>
+            <div class='label'>报考岗位</div><div class='info'> </div>
+        </div>
+<!--         <div class='row'>
+            <div class='label'></div><div class='info'></div>
+        </div>    -->     
+    </div></div>
+
+    <div class='col-15 zkz-tx'><div class='oi'>
+        <img width="100" height="140" src="/"></img>
+    </div></div>
+
+    <div class='col-100 zkz-menu'><div class='oi'>
+        <table>
+            <tr>
+                <th class='time'>考试时间</th>
+                <th class='address'>考试地点</th>
+                <th class='subject'>考试科目</th>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+                  
+        </table>  
+    </div></div>
+
+  <div class='col-100 zkz-special-rules'><div class='oi'>
+        <div class="title">温馨提示:</div>
+        <ol class="items">
+        
+            <li>考生应带好身份证和准考证及其他考试用品</li>
+        
+            <li>考生应在考试当日早上8:40之前到达考室</li>
+        
+            <li>考试当日9:30之后考生不得再进入考试参加考试</li>
+        
+        </ol>
+    </div></div>
+
+    <div class="clear"></div>
+</div>
+</div>
+
+</div>
+
+
+<div class="center"> <input type="button" onclick="printDiv('print-area')" value="打印准考证" /></div>
+{% endblock %}
+
+{% block hardcode_js %}
+function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+
+$(document).ready(function() {
+    var zkz_rules_height = $('.zkz-rules').height();
+    var zkz_flag_height  = $('.zkz-flag').height();
+    var diff  =  Math.floor((zkz_rules_height-zkz_flag_height)/2);
+    if (diff>0){
+        $('.single').css({'margin-top':diff, 'margin-bottom':diff});
+    }
+})
+{% endblock %}

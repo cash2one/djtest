@@ -1,0 +1,18 @@
+{% extends "accounts/home.html" %}
+
+{% block option %}
+
+<ul class="vmenu fr">
+    <li><a href="{{url('accounts:password_reset')}}" title="">忘记密码了?</a></li>  
+    <li><a href="{{url('accounts:register')}}" title="">没有账号?</a></li>  
+</ul>
+
+{% endblock %}
+
+{% import 'macro.html' as macro with context %}
+
+{% block content %}
+
+    {{macro.render_simple_form(form)}}
+
+{% endblock %}

@@ -1,0 +1,153 @@
+.simple-form input[type=text],
+.simple-form input[type=password],
+.simple-form input[type=email],
+.simple-form input[type=url],
+.simple-form input[type=number],
+.simple-form select,
+.simple-form textarea {  
+    width: 35em;
+}
+
+.simple-form label{
+  width:7em;
+}
+
+.zkz {
+  margin: auto;
+  width: 820px;
+/*  background-image: url(shuiyin.jpg);*/
+}
+
+.zkz .dotted {
+  border-bottom: 2px dotted #000;  
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+
+.zkz th{
+  border: 1px solid #ccc;
+}
+
+.zkz .up, 
+.zkz .down{
+  border:2px solid #ccc;
+  min-height: 400px;
+  padding: .2em 2em;
+}
+
+.zkz .single {
+  font-size: 350%;
+  line-height: 150%;
+}
+
+.zhang {
+  position: relative;
+  width:151px;
+  margin:auto;
+}
+
+.zhang img{
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+}
+
+/*.single{
+  margin-bottom: 50px;
+  margin-top: 50px;
+}*/
+
+.zkz-base-info .label, 
+.zkz-base-info .info{
+  display: inline-block;
+  padding: .5em;
+
+}
+
+.zkz-base-info .label{
+  /*text-align: right;*/
+  width:9em;
+  font-weight: bold;
+}
+
+.zkz-menu {
+  font-size: 90%;
+  float: left;
+}
+.zkz-menu .time{
+  width:18em;
+}
+.zkz-menu .address{
+  width:22em;
+}
+
+.zkz-special-rules>.oi{
+  padding-top: 2em;
+}
+
+.zkz-org {
+  font-size: 250%;
+  /*font-family: 方正小标宋简体,黑体;*/
+}
+
+.zkz-rules {
+
+}
+
+.zkz ol li{
+  font-size: 80%;
+  font-family:微软雅黑;
+  text-align: justify;
+}
+.zkz-title{
+  font-size: 150%;
+}
+.zkz-footer {
+  font-size: 120%;
+}
+
+.rotate{
+    -ms-transform:rotate(180deg); /* IE 9 */
+    -moz-transform:rotate(180deg); /* Firefox */
+    -webkit-transform:rotate(180deg); /* Safari and Chrome */
+    -o-transform:rotate(180deg); /* Opera */
+}
+
+.detail-table {
+  margin: auto;
+  font-size:100%;
+}
+
+.detail-table td {
+  border:1px solid #000;
+  padding: 3px;
+}
+
+.detail-table div,
+.detail-table pre {
+  width: 5em;
+  display: block;
+  word-wrap:break-word;
+  font-family: 楷体,微软雅黑;
+}
+
+.detail-table pre {
+  font-family: 楷体,微软雅黑;
+}
+/*
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #print-area, #print-area * {
+    visibility: visible;
+  }
+  #print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}*/
+

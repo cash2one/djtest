@@ -1,0 +1,38 @@
+{% extends "home.html" %}
+
+{% block title %} 考试须知 {% endblock %}
+
+{% block page_css %}
+<style type="text/css">
+	#content>.oi{
+	  padding-left: 50px;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<ul style="width:50em">
+	<li>
+		<h3>报名事项</h3>
+		<ol>
+			<li>报名需要先使用本人账号登录本站，如果您还没有账号，需要使用<b style="color:red">本人</b>身份证号<a href="{{ url('accounts:register') }}" title="">点击此处</a>注册。</li>
+			<li>注册身份证号将作为您以后每次在本站报名考试的身份证号信息，不可更改。这意味着您无法使用自己的账号为他人报名。</li>
+			<li>如果报名过程中出现异常导致报名无法进行，请立即致电招考机构0831-2620738。</li>
+			<li>当您不使用本网站时，请点击右上角“注销”退出登录，保护账号安全</li>
+		</ol>
+	</li>
+
+	<li>
+		<h3>建议浏览器</h3>
+		<ol>
+			<li>常见浏览器皆可，例如
+    <a href="http://chrome.360.cn/" target="_blank">360极速</a>、
+    <a href="http://www.firefox.com.cn" target="_blank">火狐</a> 或
+    <a href="http://www.opera.com/zh-cn" target="_blank">欧朋</a> 。版本太低的浏览器（例如IE6）会导致本网站不能正常运作，影响您的使用体验。</li>
+		</ol>
+	</li>
+
+</ul>
+
+{% endblock %}

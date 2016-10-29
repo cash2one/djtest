@@ -1,0 +1,34 @@
+{% extends appname+"/admin_home.html" %}
+
+{% block title %}{{config.title}}{% endblock %}
+
+{% block caption %}{{config.title}}{% endblock %}
+
+{% block content %}
+<table class="simple-table menu">
+	<tr>
+		<th>岗位名称</th>
+		<th>招录</th>
+		<th>待审核</th>
+		<th>通过</th>
+		<th>拒绝</th>
+	</tr>
+	{% for name, num, n1, u1, n2, u2, n3, u3 in stat_list %}
+	<tr>
+		<td>{{name}}</td>
+		<td>{{num}}</td>
+		<td>
+			<a target="_blank" href="{{u1}}">{{n1}}</a>
+		</td>
+		<td>
+			<a target="_blank" href="{{u2}}">{{n2}}</a>
+		</td>
+		<td>
+			<a target="_blank" href="{{u3}}">{{n3}}</a>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+
+
+{% endblock %}

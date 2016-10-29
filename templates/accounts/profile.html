@@ -1,0 +1,28 @@
+{% extends "accounts/home.html" %}
+
+
+{% block content %}
+{% set sfz = request.user.sfzh %}
+<table class="simple-table menu">
+    <tr>
+        <td>账号</td>
+        <td>{{sfz[:6] + '********' + sfz[-4:]}}</td>
+    </tr>
+    <tr>
+        <td>常用操作</td>
+        <td><ul class="vmenu fl">
+            <li><a href="{{ url('accounts:password_change') }}">修改密码</a></li>
+        </ul></td>
+    </tr>
+        
+<!--     <tr>
+        <td>我的考试</td>
+        <td><ul class="vmenu fl">
+            {% for e in [] %}
+                <li><a href="{{url('jiangan:detail', config_pk = e.config)}}">{{e.bkgw}}</a></li>
+            {% endfor %}
+        </ul></td>
+    </tr> -->
+
+</table>
+{% endblock %}
