@@ -13,15 +13,11 @@ urlpatterns = [
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico',permanent=True)),
 
     url(r'^$', views.home, name='home'),
-    url(r'^django/$', views.home, name='home'),
     # url(r'^$', cache_page(60 * 15)(views.home), name='home'),
     url(r'^guide/$', views.guide, name='guide'),
     url(r'^about/$', views.about, name='about'),
 ]
 
-
-urlpatterns += [url(r'^django/%s/'%app, include('%s.urls'%app, namespace=app)) 
-    for app in settings.INSTALLED_APPS if '.' not in app]
 
 urlpatterns += [url(r'^%s/'%app, include('%s.urls'%app, namespace=app)) 
     for app in settings.INSTALLED_APPS if '.' not in app]
